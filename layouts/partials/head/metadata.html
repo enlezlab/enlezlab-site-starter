@@ -1,0 +1,39 @@
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+{{/* Meta Title */}}
+{{ if .IsHome }}
+  {{ with .GetPage "home" }}
+  <title>{{ .Site.Title }} {{ if .Params.meta_title }} | {{ .Params.meta_title }} {{ end }}</title>
+  <meta property="og:title" content="{{ .Site.Title }} {{ if .Params.meta_title }} | {{ .Params.meta_title }} {{ end }}">
+  {{ end }}
+{{ else }}
+  <title>{{ .Params.meta_title }} {{ if .Params.tagline }} - {{ .Params.tagline }} {{ end }}| {{ .Site.Title }}</title>
+  <meta property="og:title" content="{{ .Params.meta_title }} | {{ .Site.Title }}">
+{{ end }}
+
+<link rel="canonical" href="{{ $.Site.Params.domainProd }}{{ .RelPermalink }}">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+{{/* Meta Description */}}
+{{ if .Params.summary }}
+  <meta name="description" content="{{ .Params.summary }}">
+  <meta property="og:description" content="{{ .Params.summary }}">
+{{ else if .Summary }}
+  <meta name="description" content="{{ .Summary }}">
+  <meta property="og:description" content="{{ .Summary }}">
+{{ else }}
+  <meta name="description" content="{{ .Params.meta_description }}">
+  <meta property="og:description" content="{{ .Params.meta_description }}">
+{{ end }}
+
+{{/* OG Image */}}
+<meta property="og:image" content="/og-image.jpg">
+
+{{ if eq .Section "articles" }}
+  <meta property="og:type" content="Article">
+{{ else }}
+  <meta property="og:type" content="Website">
+{{ end }}

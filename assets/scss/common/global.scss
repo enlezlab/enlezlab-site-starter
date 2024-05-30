@@ -1,0 +1,172 @@
+
+html, body {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-04);
+}
+
+.body-lock {
+  position: fixed;
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-03);;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  margin-bottom: var(--space-m);
+
+  &:empty {
+    display: none;
+  }
+}
+
+strong {
+  font-weight: bold;
+}
+
+sup {
+  font-size: 60%;
+  transform: translateY(-10px);
+  display: inline-block;
+}
+
+pre {
+  margin-bottom: var(--space-m);
+}
+
+ul, ol {
+  padding-left: var(--space-m);
+  margin-bottom: var(--space-m);
+}
+
+ul li {
+  list-style: disc;
+}
+
+ol li {
+  list-style: number;
+  padding: revert;
+}
+
+table ol li {
+  list-style: none;
+}
+
+.list-reset {
+  margin: 0;
+  padding: 0;
+}
+
+.list-reset li {
+  list-style: none;
+}
+
+em {
+  font-weight: bold;
+}
+
+img {
+  vertical-align: middle;
+  width: 100%;
+}
+
+// quick fix, need to move it to its own file
+.a-propos .md__image {
+  width: 100%;
+  margin: var(--space-m) auto;
+  transition: .3s ease;
+}
+
+.a-propos .md__image a {
+  display: block;
+  max-height: 650px
+}
+
+.a-propos .md__image img {
+  width: initial;
+  height: initial;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.md__image {
+  width: 100%;
+  margin: var(--space-m) auto;
+  transition: .3s ease;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.md__image a {
+  display: block;
+}
+
+.md__image img {
+  display: block;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+
+.main {
+  min-height: 100vh;
+}
+
+.reading-zone a,
+p > a {
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-s);
+  padding-right: var(--space-s);
+}
+
+.container--s {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-s);
+  padding-right: var(--space-s);
+}
+
+.container--m {
+  max-width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-s);
+  padding-right: var(--space-s);
+}
+
+.container--l {
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-s);
+  padding-right: var(--space-s);
+}
+
+
+p:empty {
+  display: none;
+  margin-bottom: 0;
+}
+
+
+

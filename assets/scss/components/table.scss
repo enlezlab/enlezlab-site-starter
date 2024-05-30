@@ -1,0 +1,77 @@
+table {
+  border: 2px solid var(--color-03);
+  width: 100%;
+  font-family: var(--font-heading);
+}
+
+td {
+  padding: var(--space-m);
+}
+
+thead td {
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.5rem;
+  background: var(--color-03);
+  color: var(--color-01);
+}
+
+tbody tr {
+  border: 2px solid var(--color-03);
+}
+
+tbody td {
+  border: 2px solid var(--color-03);
+}
+
+tbody tr:first-child {
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.2rem;
+  background: var(--color-04);
+  color: var(--color-00);
+}
+
+@media (max-width: 768px) {
+
+  thead td:nth-child(1),
+  thead td:nth-child(3) {
+    display: none;
+  }
+
+  tbody > tr:nth-child(1) {
+    display: none;
+  }
+
+  tbody > tr:nth-child(2) {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  tbody > tr:nth-child(2) td {
+    padding: 0;
+  }
+
+  tbody > tr:nth-child(2) td > * {
+    padding: var(--space-s) var(--space-m);
+  }
+
+  tbody > tr:nth-child(2) td li {
+    margin-left: var(--space-s);
+  }
+
+  tbody > tr:nth-child(2) td::before {
+    content: attr(data-label);
+    background: var(--color-04);
+    width: 100%;
+    display: block;
+    padding: var(--space-s);
+    box-sizing: border-box;
+    font-weight: 900;
+  }
+
+  tbody > tr:nth-child(2),
+  tbody > tr:nth-child(2) td {
+    border: none;
+  }
+}

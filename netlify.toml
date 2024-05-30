@@ -1,0 +1,10 @@
+[functions]
+  directory = "functions"
+
+[build]
+publish = "public"
+
+[context.production.environment]
+HUGO_VERSION = "0.125.0"
+HUGO_ENV = "production"
+

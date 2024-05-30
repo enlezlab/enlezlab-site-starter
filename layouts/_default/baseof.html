@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.LanguageCode }}">
+
+  <head>
+    {{ partial "head/metadata" . }}
+    {{ partial "head/font" . }}
+    {{ partial "head/style" . }}
+    {{ partial "tracking/matomo" . }}
+  </head>
+
+  <body class="{{ .Section }}">
+    {{ partial "site-header" . }}
+    <main id="main_content">
+      {{ block "main" . }} {{ .Content }} {{ end }}
+    </main>
+    {{ partial "site-footer" . }}
+    {{ partial "helper/script-loader" . }}
+  </body>
+
+</html>

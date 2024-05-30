@@ -1,0 +1,24 @@
+<div class="media-object">
+  {{ $filename := .Params.image }}
+  {{ $img := "" }}
+  {{ $imgPath := "" }}
+
+  {{ if .Resources.Get $filename }}
+    {{ $img = .Resources.Get $filename }}
+    {{ $imgPath = $img.Permalink }}
+  {{ else }}
+    {{ $imgPath = "" }}
+  {{ end }}
+  <figure class="media-object__img">
+    <img src="{{ $imgPath}}" alt="">
+  </figure>
+  <div class="media-object__text">
+    {{ .Content }}
+
+    {{ if .Params.cta_link }}
+    <a href="{{ .Params.cta_link }}" class="btn btn--primary">
+      {{ .Params.cta_text }}
+    </a>
+    {{ end }}
+  </div>
+</div>

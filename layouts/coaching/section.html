@@ -1,0 +1,18 @@
+{{ define "main" }}
+
+{{ with .GetPage "coaching/hero" }}
+  {{ partial "hero--l" . }}
+{{ end }}
+
+{{ with .GetPage "coaching/main" }}
+  <section class="reading-zone container--l">
+    {{ .Content | safeHTML }}
+  </section>
+{{ end }}
+
+<section class="container--s my-l">
+  {{ with .GetPage "common/contact-form" }}
+    {{ partial "form" . }}
+  {{ end }}
+</section>
+{{ end }}

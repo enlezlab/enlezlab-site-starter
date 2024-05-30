@@ -1,0 +1,52 @@
+{{ $hasArticle := false }}
+{{ with .GetPage "articles" }}
+  {{ if gt (len .Pages) 0 }}
+    {{ $hasArticle = true }}
+  {{ end }}
+{{ end }}
+
+<header class="site-header">
+  <div class="site-header__inner container">
+    <a href="/" class="site-header__logo">
+      <img class="site-header__logo--img" src="/logo.svg" alt="">
+    </a>
+
+    <nav>
+      <ul class="site-header__nav">
+      {{ range site.Menus.main }}
+        <li>
+          {{ if .HasChildren }}
+            <div class="site-header__nav--has-subnav">
+              <span>
+              {{ .Name }}
+              </span>
+              <svg class="site-header__nav-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+
+            </div>
+            <ul class="site-header__subnav">
+              {{ range .Children }}
+                <li>
+                  <a href="{{ .URL }}">{{ .Name }}</a></a>
+                </li>
+              {{ end }}
+            </ul>
+          {{ else }}
+            {{ if and (eq .Name "Articles") (eq $hasArticle false) }}
+            {{ else }}
+            <a href="{{ .URL }}">{{ .Name }}</a>
+            {{ end }}
+          {{ end }}
+
+        </li>
+      {{ end }}
+      </ul>
+    </nav>
+
+    <div id="btn_mobile" class="site-header__nav-btn">
+      <img class="site-header__nav-btn--open" src="/icons/menu.svg" alt="">
+      <img class="site-header__nav-btn--close"src="/icons/x.svg" alt="">
+    </div>
+
+  </div>
+</header>
+<script src="/js/site-header.js"></script>

@@ -1,0 +1,72 @@
+
+html, body {
+  font-family: var(--font-default);
+  font-size: var(--font-size-base);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    font-family: var(--font-heading);
+    font-weight: 900;
+  }
+}
+
+h1 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+  margin-bottom: var(--space-l);
+}
+
+h2 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-top: var(--space-l);
+  margin-bottom: var(--space-m);
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin-top: var(--space-l);
+  margin-bottom: var(--space-s);
+}
+
+p {
+  line-height: 1.5;
+}
+
+li {
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: var(--space-l);
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+    margin-top: var(--space-l);
+    margin-bottom: var(--space-m);
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin-top: var(--space-l);
+    margin-bottom: var(--space-s);
+  }
+}

@@ -1,0 +1,30 @@
+<footer class="site-footer">
+  <div class="site-footer__inner container">
+    <a href="/" class="site-footer__logo">
+      <img class="site-footer__logo--img" src="/logo.svg" alt="">
+    </a>
+
+    <div></div>
+
+    {{/* replace with nav loop */}}
+    <nav class="site-footer__nav">
+      {{ range site.Menus.main }}
+        <a href="{{ .URL }}">{{ .Name }}</a></a>
+      {{ end }}
+      {{ with .GetPage "references" }}
+        <a href="{{ .Permalink }}">{{ .Params.entry_title }}</a>
+      {{ end }}
+    </nav>
+  </div>
+
+  <div class="site-footer__legal">
+    <div class="mb-m">
+      {{ with .GetPage "termes-et-conditions" }}
+        <a href="{{ .Permalink }}">{{ .Params.entry_title }}</a>
+      {{ end }}
+    </div>
+    <div>
+      &copy; {{ .Site.Title }}
+    </div>
+  </div>
+</footer>

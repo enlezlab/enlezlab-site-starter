@@ -1,0 +1,12 @@
+{{ define "main" }}
+
+  {{ with .GetPage "about/hero" }}
+    {{ partial "hero--s" . }}
+  {{ end }}
+
+  {{ with .GetPage "about/main" }}
+  <section class="reading-zone container--l">
+  {{ .Content }}
+  </section>
+  {{ end }}
+{{ end }}

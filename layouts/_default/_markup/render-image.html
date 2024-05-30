@@ -1,0 +1,9 @@
+
+<p class="md__image">
+  {{ if .Destination }}
+    {{ $imgSrc := index (resources.Match .Destination) 0 }}
+    <a href="{{ $imgSrc.Permalink }}" target="_blank">
+        <img loading="lazy" src="{{ $imgSrc.Permalink }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}"{{ end }} />
+    </a>
+  {{ end }}
+</p>

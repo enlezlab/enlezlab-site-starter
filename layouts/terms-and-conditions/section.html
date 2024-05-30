@@ -1,0 +1,12 @@
+{{ define "main" }}
+
+  {{ with .GetPage "termes-et-conditions/hero" }}
+    {{ partial "hero--s" . }}
+  {{ end }}
+
+  {{ with .GetPage "termes-et-conditions/main" }}
+  <section class="reading-zone container--l">
+  {{ .Content }}
+  </section>
+  {{ end }}
+{{ end }}

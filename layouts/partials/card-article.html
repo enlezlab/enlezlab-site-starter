@@ -1,0 +1,25 @@
+
+{{ $img := "" }}
+{{ $imgSrc := .Resources.Match .Params.thumbnail  }}
+{{ if $imgSrc }}
+  {{ $imgCropped := (index $imgSrc 0).Resize "300x q80" }}
+  {{ $img = $imgCropped.Permalink }}
+{{ end }}
+
+<div class="card-article">
+  <a href="{{ .Permalink }}">
+    <figure class="card-article__img">
+      <img src="{{ $img }}" alt="">
+    </figure>
+    <div class="card-article__text">
+      <h3>{{ .Title }}</h3>
+      <p>
+        {{ if ne .Params.excerpt "" }}
+          {{ .Params.excerpt }}
+        {{ else }}
+          {{ .Summary }}
+        {{ end }}
+      </p>
+    </div>
+  </a>
+</div>

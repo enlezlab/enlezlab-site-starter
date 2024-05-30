@@ -1,0 +1,19 @@
+.breadcrumbs {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-ui);
+}
+
+.breadcrumbs a {
+  color: var(--color-03);
+  font-weight: 900;
+}
+
+.breadcrumbs svg {
+  stroke: var(--color-03);
+  transition: .3s ease;
+}
+
+.breadcrumbs:hover svg {
+  transform: translateX(-10px)
+}

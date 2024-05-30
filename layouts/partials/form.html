@@ -1,0 +1,79 @@
+
+<section class="mb-l">
+  {{ .Content }}
+</section>
+
+<form id="form_inquiry" class="form-basic" name="Contact" data-netlify="true">
+  {{ range .Params.form }}
+  {{ if or (eq .type "text") (eq .type "email") (eq .type "tel")  }}
+  <div>
+    <label for="{{ .id }}">{{ .label }}</label>
+    <input id="{{ .id }}" type="{{ .type }}" name="{{ .name }}" placeholder="{{ .hint }}" {{ if eq .required true }} required {{ end }}>
+    {{ if .note }}
+    <small>
+      {{ .note | safeHTML }}
+    </small>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  {{ if eq .type "select" }}
+  <div>
+    <label for="{{ .id }}">{{ .label }}</label>
+    <select id="{{ .id }}" name="{{ .name }}" {{ if eq .required true }} required {{ end }}>
+      <option value="" selected disabled>{{ .hint }}</option>
+      {{ range .options }}
+      <option value="{{ .value }}">{{ .name }}</option>
+      {{ end }}
+    </select>
+    {{ if .note }}
+    <small>
+      {{ .note | safeHTML }}
+    </small>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  {{ if eq .type "textarea" }}
+  <div>
+    <label for="{{ .id }}">{{ .label }}</label>
+    <textarea id="{{ .id }}" name="{{ .name }}" cols="30" rows="10" {{ if eq .required true }} required {{ end }} placeholder="{{ .hint }}"></textarea>
+    {{ if .note }}
+    <small>
+      {{ .note | safeHTML }}
+    </small>
+    {{ end }}
+  </div>
+  {{ end }}
+  {{ end }}
+
+  <div class="consent-wrap">
+    <input id="consent" name="consent" type="checkbox">
+    <label for="consent">
+
+      {{ if eq .Lang "en" }}
+        I agree to the
+      {{ else if eq .Lang "fr" }}
+        J'accepte de
+      {{ end }}
+
+      {{ with .GetPage "terms-and-conditions" }}
+        <a href="{{ .Permalink }}" style="text-transform: lowercase;">
+          {{ .Params.entry_title }}
+        </a>
+      {{ end }}
+    </label>
+  </div>
+
+  <button id="btn_submit" class="btn btn--primary btn--disabled">
+    {{ .Params.submit }}
+  </button>
+</form>
+
+<script>
+  const lang = () => {
+    return "{{ .Lang }}";
+  };
+</script>
+<script src="/js/form.js"></script>
+

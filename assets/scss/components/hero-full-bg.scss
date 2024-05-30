@@ -1,0 +1,65 @@
+.hero-full-bg {
+  background-size: cover;
+  width: 100%;
+  height: 650px;
+  // max-height: 70vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-full-bg::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to bottom, var(--color-01),transparent, transparent);
+}
+
+.hero-full-bg::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to top, var(--color-00), rgba(0, 0, 0, .2), transparent);
+}
+
+
+.hero-full-bg__text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  text-shadow: 0px 0px 10px var(--color-00);
+  color: var(--color-01);
+  max-width: 600px;
+  padding: var(--space-m);
+}
+
+.hero-full-bg h1 {
+  margin: 0;
+  margin-bottom: var(--space-m);
+  font-weight: 700;
+  font-style: italic;
+}
+
+.hero-full-bg__text p {
+  margin-bottom: var(--space-s);;
+  font-family: var(--font-ui);
+  font-weight: 300;
+}
+
+.hero-full-bg__text h1,
+.hero-full-bg__text p {
+  text-shadow: 0px 0px 10px var(--color-00);
+}
+
+.hero-full-bg__text .btn {
+  text-shadow: none;
+  margin: var(--space-l);
+}
+

@@ -1,0 +1,6 @@
+
+
+{{ $options := (dict "enableSourceMap" true "outputStyle" "compressed") }}
+{{ $style := resources.Get "scss/main.scss" | resources.ToCSS $options | fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink }}">
+

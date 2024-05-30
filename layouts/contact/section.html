@@ -1,0 +1,13 @@
+{{ define "main" }}
+
+{{ with .GetPage "contact/hero" }}
+  {{ partial "hero--s" . }}
+{{ end }}
+
+<section class="container--s mb-l">
+  {{ with .GetPage "common/contact-form" }}
+    {{ partial "form" . }}
+  {{ end }}
+</section>
+
+{{ end }}
