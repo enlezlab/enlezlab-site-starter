@@ -1,20 +1,29 @@
 {{ define "main" }}
 
-  {{ with .GetPage "home/hero" }}
-    {{ partial "hero--m" . }}
-  {{ end }}
-
-  <section class="container--l">
-    {{ with .GetPage "home/value-prop-01" }}
-      {{ partial "media-object" . }}
-    {{ end }}
-
-    {{ with .GetPage "home/value-prop-02" }}
-      {{ partial "media-object--reverse" . }}
-    {{ end }}
-
-    {{ with .GetPage "home/value-prop-03" }}
-      {{ partial "media-object" . }}
+  <section class="container">
+    {{ with .GetPage "home" }}
+      {{ range .Pages }}
+        {{ $path := printf "web-components/%s" .Params.component }}
+        {{ partial $path . }}
+      {{ end }}
     {{ end }}
   </section>
+
+  <!-- {{ with .GetPage "home/hero" }} -->
+  <!--   {{ partial "hero--m" . }} -->
+  <!-- {{ end }} -->
+
+  <!-- <section class="container--l"> -->
+  <!--   {{ with .GetPage "home/value-prop-01" }} -->
+  <!--     {{ partial "web-components/media-object" . }} -->
+  <!--   {{ end }} -->
+
+  <!--   {{ with .GetPage "home/value-prop-02" }} -->
+  <!--     {{ partial "web-components/media-object-reverse" . }} -->
+  <!--   {{ end }} -->
+
+  <!--   {{ with .GetPage "home/value-prop-03" }} -->
+  <!--     {{ partial "media-object" . }} -->
+  <!--   {{ end }} -->
+  <!-- </section> -->
 {{ end }}

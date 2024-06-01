@@ -1,0 +1,49 @@
+{{ $filename := .Params.image }}
+{{ $img := "" }}
+{{ $imgPath := "" }}
+
+{{ if .Resources.Get $filename }}
+  {{ $img = .Resources.Get $filename }}
+  {{ $imgPath = $img.Permalink }}
+{{ else }}
+  {{ $imgPath = "" }}
+{{ end }}
+
+{{ $tag := .Params.component }}
+{{ $title := .Params.data_title }}
+{{ $titleLevel := .Params.data_title_level }}
+{{ $subtitle := .Params.data_subtitle }}
+{{ $body := .Params.data_body | markdownify }}
+{{ $image := $imgPath }}
+{{ $ctaText := .Params.cta_text }}
+{{ $ctaLink := .Params.cta_link }}
+
+{{ printf
+`
+<%[1]s
+data-title='%s'
+data-title-level='%s'
+data-subtitle='%s'
+data-body='%s'
+data-image='%s'
+data-cta-text='%s'
+data-cta-link='%s'
+>
+</%[1]s>
+`
+$tag
+$title
+$titleLevel
+$subtitle
+$body
+$image
+$ctaText
+$ctaLink
+| safeHTML }}
+
+
+<script type="module" src="/lib/enlezlab-ui/components/media-object.js"></script>
+
+
+
+
