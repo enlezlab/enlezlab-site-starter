@@ -1,6 +1,6 @@
 ---
 weight: 1
-title: "[Home] Hero"
+title: ""
 cta_text: ""
 cta_link: ""
 image: bg.jpg

@@ -32,7 +32,6 @@ class HeroMain extends piq {
         margin-top: calc(var(--space-l) * 1);
         margin-bottom: calc(var(--space-l) * 2);
         padding: 0 var(--sapce-s);
-        height: 100vh;
       }
 
         .hero h1 {

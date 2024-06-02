@@ -1,12 +1,30 @@
 {{ define "main" }}
 
-  {{ with .GetPage "about/hero" }}
-    {{ partial "hero--s" . }}
-  {{ end }}
+  <section class="container">
+    {{ with .GetPage .Section }}
+      {{ range .Pages }}
 
-  {{ with .GetPage "about/main" }}
-  <section class="reading-zone container--l">
-  {{ .Content }}
+        {{ if .Params.component }}
+          {{ $pathWebComponent := printf "web-components/%s" .Params.component }}
+          {{ partial $pathWebComponent . }}
+        {{ end }}
+
+
+        {{ if .Params.partial }}
+          {{ $pathPartial := printf "%s" .Params.partial }}
+          {{ partial $pathPartial . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
   </section>
-  {{ end }}
+
+  <!-- {{ with .GetPage "about/hero" }} -->
+  <!--   {{ partial "hero--s" . }} -->
+  <!-- {{ end }} -->
+
+  <!-- {{ with .GetPage "about/main" }} -->
+  <!-- <section class="reading-zone container--l"> -->
+  <!-- {{ .Content }} -->
+  <!-- </section> -->
+  <!-- {{ end }} -->
 {{ end }}

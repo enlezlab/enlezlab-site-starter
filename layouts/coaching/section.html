@@ -1,18 +1,36 @@
 {{ define "main" }}
 
-{{ with .GetPage "coaching/hero" }}
-  {{ partial "hero--l" . }}
-{{ end }}
+  <section class="container">
+    {{ with .GetPage .Section }}
+      {{ range .Pages }}
 
-{{ with .GetPage "coaching/main" }}
-  <section class="reading-zone container--l">
-    {{ .Content | safeHTML }}
+        {{ if .Params.component }}
+          {{ $pathWebComponent := printf "web-components/%s" .Params.component }}
+          {{ partial $pathWebComponent . }}
+        {{ end }}
+
+
+        {{ if .Params.partial }}
+          {{ $pathPartial := printf "%s" .Params.partial }}
+          {{ partial $pathPartial . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
   </section>
-{{ end }}
 
-<section class="container--s my-l">
-  {{ with .GetPage "common/contact-form" }}
-    {{ partial "form" . }}
-  {{ end }}
-</section>
+<!-- {{ with .GetPage "coaching/hero" }} -->
+<!--   {{ partial "hero--l" . }} -->
+<!-- {{ end }} -->
+
+<!-- {{ with .GetPage "coaching/main" }} -->
+<!--   <section class="reading-zone container--l"> -->
+<!--     {{ .Content | safeHTML }} -->
+<!--   </section> -->
+<!-- {{ end }} -->
+
+<!-- <section class="container--s my-l"> -->
+<!--   {{ with .GetPage "common/contact-form" }} -->
+<!--     {{ partial "form" . }} -->
+<!--   {{ end }} -->
+<!-- </section> -->
 {{ end }}
