@@ -1,13 +1,31 @@
 {{ define "main" }}
 
-{{ with .GetPage "contact/hero" }}
-  {{ partial "hero--s" . }}
-{{ end }}
+  <section class="container">
+    {{ with .GetPage .Section }}
+      {{ range .Pages }}
 
-<section class="container--s mb-l">
-  {{ with .GetPage "common/contact-form" }}
-    {{ partial "form" . }}
-  {{ end }}
-</section>
+        {{ if .Params.component }}
+          {{ $pathWebComponent := printf "web-components/%s" .Params.component }}
+          {{ partial $pathWebComponent . }}
+        {{ end }}
+
+
+        {{ if .Params.partial }}
+          {{ $pathPartial := printf "%s" .Params.partial }}
+          {{ partial $pathPartial . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </section>
+
+<!-- {{ with .GetPage "contact/hero" }} -->
+<!--   {{ partial "hero--s" . }} -->
+<!-- {{ end }} -->
+
+<!-- <section class="container--s mb-l"> -->
+<!--   {{ with .GetPage "common/contact-form" }} -->
+<!--     {{ partial "form" . }} -->
+<!--   {{ end }} -->
+<!-- </section> -->
 
 {{ end }}

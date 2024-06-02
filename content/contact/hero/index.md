@@ -1,7 +1,9 @@
 ---
 weight: 1
-title: "[Contact] Hero"
+title: ""
+component: "hero-main"
+data_body: |
+  # Contact
+  At vero eos et accusamus et iusto odio
 ---
 
-# Contact
-At vero eos et accusamus et iusto odio
