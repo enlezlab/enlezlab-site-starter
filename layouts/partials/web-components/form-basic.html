@@ -1,0 +1,34 @@
+<form-basic
+  data-consent-required="true"
+  data-consent-text="I agree to"
+  data-policy-url="/terms-and-conditions"
+  data-policy-text="terms and conditions"
+  data-message-success=""
+  data-message-failed=""
+  data-json='
+    [
+      {
+        "name": "name",
+        "label": "Name",
+        "type": "text",
+        "placeholder": "Your Name",
+        "require": true
+      },
+      {
+        "name": "email",
+        "label": "Email",
+        "type": "email",
+        "placeholder": "Your Email",
+        "require": true
+      },
+      {
+        "name": "message",
+        "label": "Message",
+        "type": "textarea",
+        "placeholder": "Your Message",
+        "require": true
+      }
+    ]
+  '
+>
+</form-basic>
