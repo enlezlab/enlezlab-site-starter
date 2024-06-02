@@ -1,19 +1,30 @@
-<div class="media-object">
-  {{ $filename := .Params.image }}
-  {{ $img := "" }}
-  {{ $imgPath := "" }}
+{{ $filename := .Params.image }}
+{{ $img := "" }}
+{{ $imgPath := "" }}
 
-  {{ if .Resources.Get $filename }}
-    {{ $img = .Resources.Get $filename }}
-    {{ $imgPath = $img.Permalink }}
-  {{ else }}
-    {{ $imgPath = "" }}
-  {{ end }}
+{{ if .Resources.Get $filename }}
+  {{ $img = .Resources.Get $filename }}
+  {{ $imgPath = $img.Permalink }}
+{{ else }}
+  {{ $imgPath = "" }}
+{{ end }}
+
+{{ $tag := .Params.component }}
+{{ $title := .Params.data_title }}
+{{ $titleLevel := .Params.data_title_level }}
+{{ $subtitle := .Params.data_subtitle }}
+{{ $body := .Params.data_body | markdownify }}
+{{ $image := $imgPath }}
+{{ $ctaText := .Params.cta_text }}
+{{ $ctaLink := .Params.cta_link }}
+
+
+<div class="media-object">
   <figure class="media-object__img">
-    <img src="{{ $imgPath}}" alt="">
+    <img src="{{ $image }}" alt="">
   </figure>
   <div class="media-object__text">
-    {{ .Content }}
+    {{ $body }}
 
     {{ if .Params.cta_link }}
     <a href="{{ .Params.cta_link }}" class="btn btn--primary">

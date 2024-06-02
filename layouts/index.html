@@ -3,8 +3,17 @@
   <section class="container">
     {{ with .GetPage "home" }}
       {{ range .Pages }}
-        {{ $path := printf "web-components/%s" .Params.component }}
-        {{ partial $path . }}
+
+        {{ if .Params.component }}
+          {{ $pathWebComponent := printf "web-components/%s" .Params.component }}
+          {{ partial $pathWebComponent . }}
+        {{ end }}
+
+
+        {{ if .Params.partial }}
+          {{ $pathPartial := printf "%s" .Params.partial }}
+          {{ partial $pathPartial . }}
+        {{ end }}
       {{ end }}
     {{ end }}
   </section>
