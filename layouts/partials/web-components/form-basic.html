@@ -3,7 +3,11 @@ line below and hidden input in the form gen config
 is required for Netlify form to work with js rendered form
 */}}
 
-<form data-netlify="true" name="Contact"></form>
+<form data-netlify="true" name="Contact">
+  <input type="hidden" name="name">
+  <input type="hidden" name="email">
+  <input type="hidden" name="message">
+</form>
 <form-basic
   data-form-name="Contact"
   data-consent-required="true"
