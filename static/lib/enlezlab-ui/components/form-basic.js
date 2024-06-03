@@ -31,7 +31,6 @@ class FormBasic extends piq {
   inputs() {
     let inputs = '';
     this.data().forEach((i) => {
-      console.log(i)
       inputs += this.inputGen(i);
     });
 
@@ -123,8 +122,8 @@ class FormBasic extends piq {
 
   template() {
     return html`
-      <div>
-        <form id="form_inquiry" class="form-basic" action="">
+      <div class="container--s">
+        <form id="form_inquiry" class="form-basic" netlify>
           ${this.inputs()}
           ${this.consentCheck()}
 
