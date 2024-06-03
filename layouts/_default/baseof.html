@@ -9,11 +9,11 @@
   </head>
 
   <body class="{{ .Section }}">
-    {{ partial "site-header" . }}
+    {{ partial "web-components/site-header" . }}
     <main id="main_content">
       {{ block "main" . }} {{ .Content }} {{ end }}
     </main>
-    {{ partial "site-footer" . }}
+    {{ partial "web-components/site-footer" . }}
     {{ partial "helper/script-loader" . }}
   </body>
 
