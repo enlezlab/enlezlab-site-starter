@@ -93,7 +93,7 @@ class FormBasic extends piq {
     const formData = new FormData(myForm);
     const _this = this;
 
-    fetch("/", {
+    fetch("https://formspree.io/f/mpzojgqy", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(formData).toString(),
