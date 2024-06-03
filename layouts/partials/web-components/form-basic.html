@@ -1,3 +1,9 @@
+{{/*
+line below and hidden input in the form gen config
+is required for Netlify form to work with js rendered form
+*/}}
+
+<form data-netlify="true" name="Contact"></form>
 <form-basic
   data-form-name="Contact"
   data-consent-required="true"
@@ -9,10 +15,19 @@
   data-json='
     [
       {
+        "name": "Contact",
+        "label": "Contact",
+        "type": "hidden",
+        "placeholder": "",
+        "default": "Contact",
+        "require": true
+      },
+      {
         "name": "name",
         "label": "Name",
         "type": "text",
         "placeholder": "Your Name",
+        "default": "",
         "require": true
       },
       {
@@ -20,6 +35,7 @@
         "label": "Email",
         "type": "email",
         "placeholder": "Your Email",
+        "default": "",
         "require": true
       },
       {
@@ -27,6 +43,7 @@
         "label": "Message",
         "type": "textarea",
         "placeholder": "Your Message",
+        "default": "",
         "require": true
       }
     ]

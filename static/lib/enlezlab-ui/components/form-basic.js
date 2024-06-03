@@ -18,6 +18,10 @@ class FormBasic extends piq {
           <label>${data.label}</label>
           <input type="${data.type}" name="${data.name}" placeholder="${data.placeholder}" />
         `
+      case (type === 'hidden'):
+        return `
+          <input type="${data.type}" name="${data.name}" value="${data.default}" />
+        `
       case (type === 'textarea'):
         return `
           <label>${data.label}</label>
@@ -93,7 +97,7 @@ class FormBasic extends piq {
     const formData = new FormData(myForm);
     const _this = this;
 
-    fetch("https://formspree.io/f/mpzojgqy", {
+    fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(formData).toString(),
