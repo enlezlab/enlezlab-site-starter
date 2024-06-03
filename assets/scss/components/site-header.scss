@@ -38,7 +38,7 @@
   font-size: 90%;
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: repeat(7, auto);
+  grid-template-columns: repeat(3, auto);
   grid-gap: var(--space-m);
   position: relative;
 }
@@ -84,7 +84,7 @@ ul.site-header__subnav--opened {
 
 // Mobile
 
-@media (max-width: 1168px) {
+@media (max-width: 768px) {
 
 
   .site-header a {
