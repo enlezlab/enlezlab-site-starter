@@ -123,7 +123,7 @@ class FormBasic extends piq {
   template() {
     return html`
       <div class="container--s">
-        <form id="form_inquiry" class="form-basic" netlify>
+        <form id="form_inquiry" class="form-basic" name="${this.props('data-form-name')}" data-netlify="true">
           ${this.inputs()}
           ${this.consentCheck()}
 
