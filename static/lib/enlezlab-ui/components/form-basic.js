@@ -16,12 +16,12 @@ class FormBasic extends piq {
       case (type === 'text' || type === 'email' || type === 'tel'):
         return `
           <label>${data.label}</label>
-          <input type="${data.type}" placeholder="${data.placeholder}" />
+          <input type="${data.type}" name="${data.name}" placeholder="${data.placeholder}" />
         `
       case (type === 'textarea'):
         return `
           <label>${data.label}</label>
-          <textarea id="" name="" cols="30" rows="10" placeholder="${data.placeholder}"></textarea>
+          <textarea id="" name="${data.name}" cols="30" rows="10" placeholder="${data.placeholder}"></textarea>
         `
       default:
         return;
