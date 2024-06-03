@@ -16,7 +16,7 @@ class SiteHeader extends piq {
 
     listNav.forEach((i) => {
       const item = html`
-        <li>
+        <li class="site-header__nav-item">
           <a href="${i.url}">
             ${i.name}
           </a>
@@ -73,7 +73,7 @@ class SiteHeader extends piq {
         align-items: center;
       }
 
-      .site-header__nav {
+      .site-header__nav > ul {
         font-family: var(--font-ui);
         color: var(--color-03);
         font-weight: 400;
@@ -83,27 +83,6 @@ class SiteHeader extends piq {
         grid-template-columns: repeat(3, auto);
         grid-gap: var(--space-m);
         position: relative;
-      }
-
-      ul.site-header__subnav {
-        position: absolute;
-        background: var(--color-01);
-        border: 1px solid var(--color-03);
-        border-radius: 5px;
-        padding: var(--space-m);
-        display: none;
-        z-index: 10;
-        right: 0;
-      }
-
-      .site-header__nav--has-subnav {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-      }
-
-      ul.site-header__subnav--opened {
-        display: block;
       }
 
       .site-header__nav-icon {
@@ -147,9 +126,22 @@ class SiteHeader extends piq {
           display: none;
         }
 
-        ul.site-header__nav--opened {
+        .site-header__nav > ul {
           display: block;
+        }
+
+        .site-header__nav-item {
+          text-align: center;
+          font-size: 1.5rem;
+          font-weight: 900;
+          margin: var(--space-m) 0;
+        }
+
+        .site-header__nav--opened {
+          display: flex;
           flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
           position: fixed;
           top: 0;
           left: 0;
@@ -191,16 +183,6 @@ class SiteHeader extends piq {
           filter: invert(1);
         }
 
-
-        ul.site-header__subnav {
-          position: static;
-          background: var(--color-03);
-          border: none;
-          border-radius: 0;
-          padding: var(--space-s);
-          font-weight: 600;
-        }
-
       }
 
     `;
@@ -215,9 +197,11 @@ class SiteHeader extends piq {
           </a>
 
           <nav>
-            <ul class="site-header__nav">
-              ${this.navGen()}
-            </ul>
+            <div class="site-header__nav">
+              <ul>
+                ${this.navGen()}
+              </ul>
+            </div>
           </nav>
 
           <div id="btn_mobile" class="site-header__nav-btn">
