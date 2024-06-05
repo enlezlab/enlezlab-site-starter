@@ -9,6 +9,7 @@
   </head>
 
   <body class="{{ .Section }}">
+    {{ partial "widget/page-interact" }}
     {{ partial "web-components/site-header" . }}
     <main id="main_content">
       {{ block "main" . }} {{ .Content }} {{ end }}
