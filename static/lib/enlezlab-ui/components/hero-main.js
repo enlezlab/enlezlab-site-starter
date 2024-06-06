@@ -51,14 +51,30 @@ class HeroMain extends piq {
     `
   }
 
+  output() {
+    const res = {
+      title: this.props('data-title'),
+      body: this.props('data-body'),
+    };
+
+    return JSON.stringify(res)
+  };
+
   template() {
     return html`
       <section class="hero">
         <div class="container">
+          ${this.heading(this.props('data-title'), '1')}
+          <p>
           ${this.props('data-body')}
+          </p>
         </div>
       </section>
     `;
+  };
+
+  connected() {
+    this.setAttribute('data-output', this.output());
   };
 };
 

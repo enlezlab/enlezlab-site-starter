@@ -20,8 +20,8 @@ class PageInteract extends piq {
         padding: var(--space-m);
         position: fixed;
         top: 0;
-        left: calc(-350px - var(--space-m));
-        width: 350px;
+        left: calc(-600px - var(--space-m));
+        width: 600px;
         height: 100%;
         transition: .3s ease;
       }
@@ -47,19 +47,64 @@ class PageInteract extends piq {
         cursor: pointer;
         z-index: 9999;
       }
-
-      .theme-select {
-        border: 2px solid var(--color-fg);
-        padding: var(--space-s);
-        width: 100%;
-        border-radius: 5px;
-        background: transparent;
-        color: var(--color-fg);
-        font-size: 18px;
+      .page-interact__controls {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: var(--space-m);
       }
 
-      .theme-select option {
+      .page-interact__control-item {
+        display: grid;
+        grid-template-columns: 1fr;
+        border: 1px solid #333;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .page-interact__control-item header {
+        background: #333;
+        padding: calc(var(--space-s) / 2) var(--space-s);
+        font-size: 16px;
+      }
+
+      .page-interact__control-item label {
+        background: #222;
+        color: #999;
+        padding: calc(var(--space-s) / 2) var(--space-s);
+        font-size: 16px;
+      }
+
+      .page-interact select {
+        padding: var(--space-s);
+        width: 100%;
+        background: transparent;
+        color: var(--color-fg);
+        font-size: 16px;
+        border: none;
+      }
+
+      .page-interact select option {
         background: var(--color-bg);
+      }
+
+      .page-interact input[type="text"],
+      .page-interact select,
+      .page-interact textarea {
+        box-sizing: border-box;
+        border: none;
+        padding: var(--space-s);
+        width: 100%;
+        background: #111;
+        color: #999;
+        font-size: 16px;
+      }
+
+      .page-interact input[type="text"]:focus,
+      .page-interact select:focus,
+      .page-interact textarea:focus {
+        outline: none;
+        background: var(--color-bg);
+        color: var(--color-fg);
       }
     `;
   };
@@ -73,7 +118,7 @@ class PageInteract extends piq {
       }
 
       .body-shrink {
-        padding-left: 350px
+        padding-left: 600px
       }
     `;
 
@@ -122,11 +167,15 @@ class PageInteract extends piq {
 
   themeSelect() {
     return html`
-      <select class="theme-select" name="">
-        <option value="" selected disabled>Choose a Theme</option>
-        <option value="00">Theme A</option>
-        <option value="01">Theme B</option>
-      </select>
+      <section class="page-interact__control-item">
+        <header>Theme</header>
+        <label>Color Themes</label>
+        <select class="theme-select" name="">
+          <option value="" selected disabled>Choose a Theme</option>
+          <option value="00">Theme A</option>
+          <option value="01">Theme B</option>
+        </select>
+      </section>
     `;
   };
 
@@ -148,10 +197,98 @@ class PageInteract extends piq {
     }, false);
   };
 
+  /*=== dom content interaction ===*/
+  /* make this its own component, getting messy now... */
+
+  node() {
+    const node = document.querySelectorAll('hero-main')[0];
+    return node;
+  };
+
+  nodeData() {
+    const data = this.node().dataset.output;
+    const dataObj = JSON.parse(data);
+    dataObj.component = 'hero-main'
+    return dataObj;
+  };
+
+  nodeEdit() {
+    return html`
+        <section class="page-interact__control-item">
+          <header>Hero</header>
+          <label>Component</label>
+          <select data-output-item data-output-name="component" data-output-value="${this.nodeData().component}"  id="" name="">
+            <option name="media-object" value="media-object">media-object</option>
+            <option name="media-object-reverse" value="media-object-reverse">media-object-reverse</option>
+            <option name="hero-main" value="hero-main">hero-main</option>
+          </select>
+          <label>Title</label>
+          <input data-output-item data-output-name="title" data-output-value="${this.nodeData().title}" type="text" value="${this.nodeData().title}" />
+          <label>Body</label>
+          <textarea data-output-item data-output-name="body" data-output-value="${this.nodeData().body}" id="" name="" cols="30" rows="10">${this.nodeData().body}</textarea>
+        </section>
+    `;
+  };
+
+  nodeEditAction() {
+    const _this = this;
+    const node = this.node();
+    const select = this.querySelectorAll('select')[0];
+    const title = this.querySelectorAll('input')[0];
+    const body = this.querySelectorAll('textarea')[0];
+
+
+    const options = select.querySelectorAll('option');
+    console.log(options);
+    options.forEach((i) => {
+      console.log(i);
+    });
+
+
+    select.addEventListener('input', function () {
+      _this.output();
+    }, false);
+
+    title.addEventListener('input', function () {
+      node.querySelectorAll('h1')[0].innerHTML = this.value;
+      _this.output();
+    }, false);
+
+    body.addEventListener('input', function () {
+      node.querySelectorAll('p')[0].innerHTML = this.value;
+      _this.output();
+    }, false);
+  }
+
+  /*=== end of dom content interaction ===*/
+
+
+  output() {
+    const outputItems = this.querySelectorAll('.page-interact__control-item');
+    let res = [];
+
+    outputItems.forEach((i) => {
+      const dataItem = i.querySelectorAll('[data-output-item]');
+      let item = {};
+      dataItem.forEach((key) => {
+        item[key.dataset.outputName] = key.value;
+      });
+      res.push(item);
+    });
+
+    this.setAttribute('data-output', JSON.stringify(res));
+
+    return res;
+  };
+
   template() {
     return html`
-      <div class="page-interact" draggable="true">
-       ${this.themeSelect()}
+      <div class="page-interact">
+        <div class="page-interact__controls">
+         ${this.themeSelect()}
+         ${this.nodeEdit()}
+        </div>
+
        <div class="page-interact__toggle">
         ${this.iconSetting()}
        </div>
@@ -163,6 +300,9 @@ class PageInteract extends piq {
     this.themeSelectAction();
     this.toggleAction();
     this.shrinkBody();
+
+    this.nodeEditAction();
+
   };
 
 }
