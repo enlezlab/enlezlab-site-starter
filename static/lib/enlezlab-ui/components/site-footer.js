@@ -34,9 +34,7 @@ class SiteFooter extends piq {
         font-family: var(--font-ui);
         font-weight: 400;
         color: var(--color-01);
-        position: relative;
         margin-top: calc(var(--space-l) * 4);
-        overflow-x: clip;
       }
 
       .site-footer a {
