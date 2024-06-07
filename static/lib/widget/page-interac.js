@@ -198,90 +198,36 @@ class PageInteract extends piq {
     }, false);
   };
 
-  /*=== dom content interaction ===*/
-  /* make this its own component, getting messy now... */
-
-  node() {
-    const node = document.querySelectorAll('hero-main')[0];
-    return node;
-  };
-
-  nodeData() {
-    const data = this.node().dataset.output;
-    const dataObj = JSON.parse(data);
-    dataObj.component = 'hero-main'
-    return dataObj;
-  };
-
-  nodeEdit(id, componentName) {
-    return html`
-        <section data-section-id="00" class="page-interact__control-item">
-          <header>Hero</header>
-          <label>Component</label>
-          <select data-output-item data-output-name="component" data-output-value="${this.nodeData().component}">
-            <option name="media-object" value="media-object">media-object</option>
-            <option name="media-object-reverse" value="media-object-reverse">media-object-reverse</option>
-            <option name="hero-main" value="hero-main">hero-main</option>
-          </select>
-          <label>Title</label>
-          <input data-output-item data-output-name="title" data-output-value="${this.nodeData().title}" type="text" value="${this.nodeData().title}" />
-          <label>Body</label>
-          <textarea data-output-item data-output-name="body" data-output-value="${this.nodeData().body}" id="" name="" cols="30" rows="10">${this.nodeData().body}</textarea>
-        </section>
-    `;
-  };
-
-  nodeEditAction() {
-    const _this = this;
-    const node = this.node();
-    const select = this.querySelectorAll('[data-section-id="00"] select')[0];
-    const title = this.querySelectorAll('[data-section-id="00"] input')[0];
-    const body = this.querySelectorAll('[data-section-id="00"] textarea')[0];
-
-    const options = select.querySelectorAll('option');
-    options.forEach((i) => {
-      if (i.value === this.nodeData().component) {
-        i.selected = true;
-      }
-    });
-
-    /* component select */
-    select.addEventListener('input', function () {
-      _this.output();
-    }, false);
-
-    /* title control */
-    title.addEventListener('input', function () {
-      node.querySelectorAll('h1')[0].innerHTML = this.value;
-      _this.output();
-    }, false);
-
-    /* body control */
-    body.addEventListener('input', function () {
-      node.querySelectorAll('p')[0].innerHTML = this.value;
-      _this.output();
-    }, false);
-  }
-
-  /*=== end of dom content interaction ===*/
-
 
   output() {
-    const outputItems = this.querySelectorAll('.page-interact__control-item');
+    const outputItems = this.querySelectorAll('component-control');
     let res = [];
 
     outputItems.forEach((i) => {
-      const dataItem = i.querySelectorAll('[data-output-item]');
-      let item = {};
-      dataItem.forEach((key) => {
-        item[key.dataset.outputName] = key.value;
-      });
-      res.push(item);
+      const item = i.dataset.output;
+      const data = JSON.parse(item);
+      res.push(data)
     });
 
     this.setAttribute('data-output', JSON.stringify(res));
 
     return res;
+  };
+
+  updateOutput() {
+    const _this = this;
+    const dataNode = this.querySelectorAll('[data-node]');
+    dataNode.forEach((i) => {
+      if (i.dataset.node === 'section') {
+        return;
+      }
+
+      i.addEventListener('input', function() {
+        _this.output();
+        _this.pageUpdate();
+      }, false);
+    });
+
   };
 
   mockData() {
@@ -297,8 +243,12 @@ class PageInteract extends piq {
         section: "summary",
         component: "media-object",
         type: "hero-main",
-        title: "this is title",
-        body: "this is body",
+        title: "Sed ut perspiciatis unde omnis",
+        level: "2",
+        image: "/home/value-prop-01/main.jpg",
+        cta_text: "learn more",
+        cta_link: "/service",
+        body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco ",
       },
     ]
   };
@@ -315,6 +265,7 @@ class PageInteract extends piq {
           data-component="${i.component}"
           data-title="${i.title}"
           data-body="${i.body}"
+          data-image="${i.image}"
         >
         </component-control>
       `;
@@ -324,12 +275,58 @@ class PageInteract extends piq {
     return res;
   };
 
+  pageGen() {
+    const pageNode = document.querySelectorAll('.mock-page')[0];
+    let pageNodeContent = '';
+    const data = this.mockData();
+    data.forEach((i) => {
+      const component = html`
+        <${i.component}
+          data-title="${i.title}"
+          data-title-level="${i.level}"
+          data-body="${i.body}"
+          data-cta-text="${i.cta_text}"
+          data-cta-link="${i.cta_link}"
+          data-image="${i.image}"
+        >
+        </${i.component}>
+      `;
+
+      pageNodeContent += component;
+    });
+
+    pageNode.innerHTML = pageNodeContent;
+  };
+
+  pageUpdate() {
+    const pageNode = document.querySelectorAll('.mock-page')[0];
+    let pageNodeContent = '';
+    const output = this.dataset.output;
+    const data = JSON.parse(output);
+    data.forEach((i) => {
+      const component = html`
+        <${i.component}
+          data-title="${i.title}"
+          data-title-level="${i.level}"
+          data-body="${i.body}"
+          data-cta-text="${i.cta_text}"
+          data-cta-link="${i.cta_link}"
+          data-image="${i.image}"
+        >
+        </${i.component}>
+      `;
+
+      pageNodeContent += component;
+    });
+
+    pageNode.innerHTML = pageNodeContent;
+  };
+
   template() {
     return html`
       <div class="page-interact">
         <div class="page-interact__controls">
           ${this.themeSelect()}
-          ${this.nodeEdit()}
           ${this.controlGen()}
         </div>
 
@@ -344,9 +341,13 @@ class PageInteract extends piq {
     this.themeSelectAction();
     this.toggleAction();
     this.shrinkBody();
+    this.pageGen();
 
-    this.nodeEditAction();
-
+    /* defer output generation after initial execution is done */
+    setTimeout(() => {
+      this.output();
+      this.updateOutput();
+    }, 0);
   };
 
 }

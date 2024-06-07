@@ -87,7 +87,7 @@ class ComponentControl extends piq {
     });
   };
 
-  focus() {
+  controlListener() {
     const _this = this;
     const controls = this.querySelectorAll('[data-node]');
     controls.forEach((i) => {
@@ -136,7 +136,7 @@ class ComponentControl extends piq {
   connected() {
     this.setDefaultComponent();
     this.output();
-    this.focus();
+    this.controlListener();
   };
 };
 

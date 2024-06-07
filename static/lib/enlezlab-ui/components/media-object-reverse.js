@@ -98,7 +98,9 @@ class MediaObjectReverse extends piq {
         <div class="media-object__text">
           ${this.heading(`${this.props('data-title')}`, `${this.props('data-title-level')}`)}
           <span>${this.props('data-subtitle')}</span>
+          <p>
             ${this.props('data-body')}
+          </p>
           <a href="${this.props('data-cta-link')}" class="btn btn--primary">
             ${this.props('data-cta-text')}
           </a>
