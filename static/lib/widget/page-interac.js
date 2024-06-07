@@ -212,12 +212,12 @@ class PageInteract extends piq {
     return dataObj;
   };
 
-  nodeEdit() {
+  nodeEdit(id, componentName) {
     return html`
-        <section class="page-interact__control-item">
+        <section data-section-id="00" class="page-interact__control-item">
           <header>Hero</header>
           <label>Component</label>
-          <select data-output-item data-output-name="component" data-output-value="${this.nodeData().component}"  id="" name="">
+          <select data-output-item data-output-name="component" data-output-value="${this.nodeData().component}">
             <option name="media-object" value="media-object">media-object</option>
             <option name="media-object-reverse" value="media-object-reverse">media-object-reverse</option>
             <option name="hero-main" value="hero-main">hero-main</option>
@@ -233,27 +233,29 @@ class PageInteract extends piq {
   nodeEditAction() {
     const _this = this;
     const node = this.node();
-    const select = this.querySelectorAll('select')[0];
-    const title = this.querySelectorAll('input')[0];
-    const body = this.querySelectorAll('textarea')[0];
-
+    const select = this.querySelectorAll('[data-section-id="00"] select')[0];
+    const title = this.querySelectorAll('[data-section-id="00"] input')[0];
+    const body = this.querySelectorAll('[data-section-id="00"] textarea')[0];
 
     const options = select.querySelectorAll('option');
-    console.log(options);
     options.forEach((i) => {
-      console.log(i);
+      if (i.value === this.nodeData().component) {
+        i.selected = true;
+      }
     });
 
-
+    /* component select */
     select.addEventListener('input', function () {
       _this.output();
     }, false);
 
+    /* title control */
     title.addEventListener('input', function () {
       node.querySelectorAll('h1')[0].innerHTML = this.value;
       _this.output();
     }, false);
 
+    /* body control */
     body.addEventListener('input', function () {
       node.querySelectorAll('p')[0].innerHTML = this.value;
       _this.output();
