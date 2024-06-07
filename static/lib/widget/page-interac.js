@@ -24,6 +24,7 @@ class PageInteract extends piq {
         width: 600px;
         height: 100%;
         transition: .3s ease;
+        overflow-y: scroll;
       }
 
       .page-interact--opened {
@@ -283,17 +284,58 @@ class PageInteract extends piq {
     return res;
   };
 
+  mockData() {
+    return [
+      {
+        section: "hero",
+        component: "hero-main",
+        type: "hero-main",
+        title: "this is title",
+        body: "this is body",
+      },
+      {
+        section: "summary",
+        component: "media-object",
+        type: "hero-main",
+        title: "this is title",
+        body: "this is body",
+      },
+    ]
+  };
+
+  controlGen() {
+    let res = '';
+    const data = this.mockData();
+    data.forEach((i, idx) => {
+      const prefix = idx.toString();
+      const item = html`
+        <component-control
+          data-uid="${prefix}_${i.section}"
+          data-section-name="${i.section}"
+          data-component="${i.component}"
+          data-title="${i.title}"
+          data-body="${i.body}"
+        >
+        </component-control>
+      `;
+
+      res += item;
+    });
+    return res;
+  };
+
   template() {
     return html`
       <div class="page-interact">
         <div class="page-interact__controls">
-         ${this.themeSelect()}
-         ${this.nodeEdit()}
+          ${this.themeSelect()}
+          ${this.nodeEdit()}
+          ${this.controlGen()}
         </div>
 
-       <div class="page-interact__toggle">
-        ${this.iconSetting()}
-       </div>
+        <div class="page-interact__toggle">
+          ${this.iconSetting()}
+        </div>
       </div>
     `;
   };
