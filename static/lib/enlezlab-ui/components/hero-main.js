@@ -46,10 +46,21 @@ class HeroMain extends piq {
   };
 
   heading(title, level) {
+
     return `
       <h${level}>${title}</h${level}>
     `
-  }
+  };
+
+  cta() {
+    if (this.props('data-cta-text')) {
+      return `
+          <a href="${this.props('data-cta-link')}" class="btn btn--primary">
+            ${this.props('data-cta-text')}
+          </a>
+      `;
+    }
+  };
 
   output() {
     const res = {
@@ -68,6 +79,7 @@ class HeroMain extends piq {
           <p>
           ${this.props('data-body')}
           </p>
+          ${this.cta()}
         </div>
       </section>
     `;

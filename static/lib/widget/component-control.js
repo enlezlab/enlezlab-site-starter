@@ -74,6 +74,10 @@ class ComponentControl extends piq {
       sectionName: this.props('data-section-name'),
       component: this.props('data-component'),
       title: this.props('data-title'),
+      titleLevel: this.props('data-title-level'),
+      ctaText: this.props('data-cta-text'),
+      ctaLink: this.props('data-cta-link'),
+      image: this.props('data-image'),
       body: this.props('data-body'),
     }
   };
@@ -115,20 +119,65 @@ class ComponentControl extends piq {
     this.setAttribute('data-output', JSON.stringify(resObj));
   };
 
+  componentSelect() {
+    return html`
+      <label>Component</label>
+      <select data-node="component">
+        <option name="media-object" value="media-object">media-object</option>
+        <option name="media-object-reverse" value="media-object-reverse">media-object-reverse</option>
+        <option name="hero-main" value="hero-main">hero-main</option>
+      </select>
+    `;
+  };
+
+  titleInput() {
+    return html`
+      <label>Title</label>
+      <input data-node="title" type="text" value="${this.data().title}" />
+    `;
+  };
+
+  ctaTextInput() {
+    return html`
+      <label>Button Text</label>
+      <input data-node="cta-text" type="text" value="${this.data().ctaText}" />
+    `;
+  };
+
+  ctaLinkInput() {
+    return html`
+      <label>Button Link</label>
+      <input data-node="cta-link" type="text" value="${this.data().ctaLink}" />
+    `;
+  };
+
+  imageInput() {
+    return html`
+      <label>Image</label>
+      <input data-node="image" type="text" value="${this.data().image}" />
+    `;
+  };
+
+  bodyInput() {
+    return html`
+      <label>Body</label>
+      <textarea data-node="body" id="" name="" rows="5">${this.data().body}</textarea>
+    `;
+  };
+
   template() {
     return html`
         <section class="component-control">
           <header data-node="section">${this.data().sectionName}</header>
-          <label>Component</label>
-          <select data-node="component">
-            <option name="media-object" value="media-object">media-object</option>
-            <option name="media-object-reverse" value="media-object-reverse">media-object-reverse</option>
-            <option name="hero-main" value="hero-main">hero-main</option>
-          </select>
-          <label>Title</label>
-          <input data-node="title" type="text" value="${this.data().title}" />
-          <label>Body</label>
-          <textarea data-node="body" id="" name="" cols="30" rows="5">${this.data().body}</textarea>
+
+          ${this.componentSelect()}
+          ${this.titleInput()}
+          ${this.ctaTextInput()}
+          ${this.ctaLinkInput()}
+          ${this.imageInput()}
+          ${this.bodyInput()}
+
+
         </section>
     `;
   };

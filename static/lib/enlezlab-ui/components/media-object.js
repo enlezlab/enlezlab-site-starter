@@ -84,6 +84,12 @@ class MediaObject extends piq {
   };
 
   heading(title, level) {
+    if (!level) {
+      return `
+        <h2>${title}</h2>
+      `;
+    }
+
     return `
       <h${level}>${title}</h${level}>
     `

@@ -242,10 +242,19 @@ class PageInteract extends piq {
       {
         section: "summary",
         component: "media-object",
-        type: "hero-main",
+        type: "media-object",
         title: "Sed ut perspiciatis unde omnis",
-        level: "2",
         image: "/home/value-prop-01/main.jpg",
+        cta_text: "learn more",
+        cta_link: "/service",
+        body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco ",
+      },
+      {
+        section: "value-prop",
+        component: "media-object-reverse",
+        type: "media-object",
+        title: "Sed ut perspiciatis unde omnis",
+        image: "/home/value-prop-02/main.jpg",
         cta_text: "learn more",
         cta_link: "/service",
         body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco ",
@@ -266,6 +275,8 @@ class PageInteract extends piq {
           data-title="${i.title}"
           data-body="${i.body}"
           data-image="${i.image}"
+          data-cta-text="${i.cta_text}"
+          data-cta-link="${i.cta_link}"
         >
         </component-control>
       `;
@@ -306,12 +317,12 @@ class PageInteract extends piq {
     data.forEach((i) => {
       const component = html`
         <${i.component}
-          data-title="${i.title}"
-          data-title-level="${i.level}"
-          data-body="${i.body}"
-          data-cta-text="${i.cta_text}"
-          data-cta-link="${i.cta_link}"
-          data-image="${i.image}"
+          data-title="${i['title']}"
+          data-title-level="${i['level']}"
+          data-body="${i['body']}"
+          data-cta-text="${i['cta-text']}"
+          data-cta-link="${i['cta-link']}"
+          data-image="${i['image']}"
         >
         </${i.component}>
       `;
