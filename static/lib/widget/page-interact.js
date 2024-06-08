@@ -333,6 +333,14 @@ class PageInteract extends piq {
     pageNode.innerHTML = pageNodeContent;
   };
 
+  widgetOpen() {
+    /* temp helper to make widget open by default while developing */
+    if (window.location.search === '?widget=open') {
+      this.querySelectorAll('.page-interact')[0].classList.add('page-interact--opened');
+      document.body.classList.add('body-shrink');
+    }
+  };
+
   template() {
     return html`
       <div class="page-interact">
@@ -353,6 +361,7 @@ class PageInteract extends piq {
     this.toggleAction();
     this.shrinkBody();
     this.pageGen();
+    this.widgetOpen();
 
     /* defer output generation after initial execution is done */
     setTimeout(() => {

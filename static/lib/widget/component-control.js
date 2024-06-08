@@ -153,8 +153,10 @@ class ComponentControl extends piq {
 
   imageInput() {
     return html`
-      <label>Image</label>
-      <input data-node="image" type="text" value="${this.data().image}" />
+      <image-input
+        data-node="image"
+      >
+      </image-input>
     `;
   };
 
