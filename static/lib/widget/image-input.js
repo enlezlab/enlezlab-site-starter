@@ -59,6 +59,8 @@ class ImageInput extends piq {
            `;
 
            preview.innerHTML = img;
+           _this.setAttribute('data-output', imgDataBase64);
+           // _this.setAttribute('value', imgDataBase64);
          };
          reader.readAsDataURL(file);
        }

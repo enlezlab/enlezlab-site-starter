@@ -204,6 +204,8 @@ class PageInteract extends piq {
     let res = [];
 
     outputItems.forEach((i) => {
+      console.log(i);
+      i.output();
       const item = i.dataset.output;
       const data = JSON.parse(item);
       res.push(data)
@@ -216,13 +218,11 @@ class PageInteract extends piq {
 
   updateOutput() {
     const _this = this;
-    const dataNode = this.querySelectorAll('[data-node]');
-    dataNode.forEach((i) => {
-      if (i.dataset.node === 'section') {
-        return;
-      }
+    const dataNode = this.querySelectorAll('.component-control__btn-save');
 
-      i.addEventListener('input', function() {
+    dataNode.forEach((i) => {
+      i.addEventListener('click', function() {
+        console.log(this);
         _this.output();
         _this.pageUpdate();
       }, false);

@@ -66,6 +66,31 @@ class ComponentControl extends piq {
         background: var(--color-bg);
         color: var(--color-fg);
       }
+
+      .component-control__btn-group {
+        display: flex;
+        justify-content: flex-end;
+        padding: var(--space-s);
+      }
+
+      .component-control__btn-save {
+        display: inline-block;
+        cursor: pointer;
+        background: #333;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        min-width: 120px;
+        transition: .3s ease;
+        border: 1px solid #333;
+      }
+
+      .component-control__btn-save:hover {
+        background: #222;
+        border: 1px solid #999;
+      }
     `;
   };
 
@@ -99,8 +124,13 @@ class ComponentControl extends piq {
         return;
       }
 
-      i.addEventListener('input', function() {
-        this.setAttribute('value', this.value);
+      i.addEventListener('change', function() {
+        if (this.dataset.node === 'image') {
+          this.setAttribute('value', this.dataset.output);
+        } else {
+          this.setAttribute('value', this.value);
+        }
+
         _this.output();
       }, false);
     });
@@ -112,10 +142,13 @@ class ComponentControl extends piq {
     dataNode.forEach((i) => {
       if (i.dataset.node === 'section') {
         resObj[i.dataset.node] = i.innerText;
+      } else if (i.dataset.node === 'image') {
+        resObj[i.dataset.node] = i.dataset.output;
       } else {
         resObj[i.dataset.node] = i.value;
       }
     });
+
     this.setAttribute('data-output', JSON.stringify(resObj));
   };
 
@@ -179,7 +212,9 @@ class ComponentControl extends piq {
           ${this.imageInput()}
           ${this.bodyInput()}
 
-
+          <div class="component-control__btn-group">
+            <button class="component-control__btn-save">Save</button>
+          </div>
         </section>
     `;
   };
