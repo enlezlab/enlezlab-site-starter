@@ -11,6 +11,8 @@ class PageInteract extends piq {
       page-interact {
         --color-bg: #000;
         --color-fg: #fff;
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+        font-family: "Roboto", sans-serif;
       }
 
       ::-webkit-scrollbar {
@@ -18,12 +20,13 @@ class PageInteract extends piq {
       }
 
       ::-webkit-scrollbar-thumb {
-        background: #c9b492;
+        background: #666666;
         border-radius: 6px;
       }
 
       ::-webkit-scrollbar-track {
-        background-color: #e4e4e4;
+        background-color: #222222;
+        border-left: 1px solid #333333;
       }
 
       .page-interact {
@@ -37,7 +40,7 @@ class PageInteract extends piq {
         width: 600px;
         height: 100%;
         transition: .3s ease;
-        overflow-y: auto;
+        overflow-y: scroll;
       }
 
       .page-interact--opened {
@@ -217,7 +220,6 @@ class PageInteract extends piq {
     let res = [];
 
     outputItems.forEach((i) => {
-      console.log(i);
       i.output();
       const item = i.dataset.output;
       const data = JSON.parse(item);
@@ -235,7 +237,6 @@ class PageInteract extends piq {
 
     dataNode.forEach((i) => {
       i.addEventListener('click', function() {
-        console.log(this);
         _this.output();
         _this.pageUpdate();
       }, false);
@@ -357,6 +358,7 @@ class PageInteract extends piq {
   template() {
     return html`
       <div class="page-interact">
+        <logo-columod></logo-columod>
         <div class="page-interact__controls">
           ${this.themeSelect()}
           ${this.controlGen()}

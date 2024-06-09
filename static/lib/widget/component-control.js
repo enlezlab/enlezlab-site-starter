@@ -32,13 +32,19 @@ class ComponentControl extends piq {
 
       .component-control__toggle {
         border-radius: 5px;
-        background: #111;
+        background: #111111;
         width: 25px;
         height: 25px;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        border: 1px solid #111111;
+        transition: .3s ease;
+      }
+
+      .component-control__toggle:hover {
+        border: 1px solid #ffffff;
       }
 
       .component-control__btn-close {
@@ -227,6 +233,7 @@ class ComponentControl extends piq {
       <label class="component-control__label">Image</label>
       <image-input
         data-node="image"
+        data-image-url="${this.props('data-image')}"
       >
       </image-input>
     `;

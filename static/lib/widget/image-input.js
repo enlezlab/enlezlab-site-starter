@@ -97,6 +97,48 @@ class ImageInput extends piq {
     btnGroup.appendChild(this.btnUpload());
   };
 
+  setDefaultImage(imageUrl) {
+
+    if (!imageUrl) {
+      return;
+    }
+
+    const _this = this;
+    const preview = _this.querySelectorAll('.image-input__preview')[0];
+    const img = new Image();
+
+    // For handling CORS issues
+    img.crossOrigin = "anonymous";
+
+    img.onerror = function() {
+      console.error("Error loading image:", imageUrl);
+    };
+
+    img.onload = function() {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = this.width;
+      canvas.height = this.height;
+      ctx.drawImage(this, 0, 0);
+
+      // Change format if needed
+      const dataURL = canvas.toDataURL("image/png");
+
+      // Handle the converted base64 data here (e.g., display in console, send to server)
+      const img = html`
+        <figure>
+          <img src="${dataURL}" alt="" />
+        </figure>
+      `;
+
+      preview.innerHTML = img;
+      _this.setAttribute('data-output', dataURL);
+    };
+
+
+    img.src = imageUrl;
+  }
+
   template() {
     return html`
       <div class="image-input__control">
@@ -110,6 +152,7 @@ class ImageInput extends piq {
 
   connected() {
     this.btnUploadAction();
+    this.setDefaultImage(this.props('data-image-url'));
   };
 };
 
