@@ -32,17 +32,42 @@ class ImageInput extends piq {
       .image-input__preview img {
         width: 100%;
       }
+
+      .image-input__btn-upload {
+        display: inline-block;
+        cursor: pointer;
+        background: #333;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        width: initial;
+        transition: .3s ease;
+        border: 1px solid #333;
+        text-align: center;
+      }
+
+      .image-input__btn-upload:hover {
+        background: #222;
+        border: 1px solid #999;
+      }
     `;
   };
 
-  upload() {
-    console.log('upload');
+  btnUpload() {
+    return html`
+      <label class="image-input__btn-upload">
+        <span>
+          New
+        </span>
+        <input type="file" style="display: none;"/>
+      </label>
+    `;
   };
 
-  btnUpload() {
-    const btn = document.createElement('input');
-    btn.type = 'file';
-    btn.placeholder = 'New';
+  btnUploadAction() {
+    const btn = this.querySelectorAll('.image-input__btn-upload input')[0];
     const _this = this;
 
     btn.addEventListener('change', function() {
@@ -60,14 +85,11 @@ class ImageInput extends piq {
 
            preview.innerHTML = img;
            _this.setAttribute('data-output', imgDataBase64);
-           // _this.setAttribute('value', imgDataBase64);
          };
          reader.readAsDataURL(file);
        }
 
     }, false);
-
-    return btn;
   };
 
   btnGroup() {
@@ -77,16 +99,17 @@ class ImageInput extends piq {
 
   template() {
     return html`
-      <label>Image</label>
       <div class="image-input__control">
         <div class="image-input__preview"></div>
-        <div class="btn-group"></div>
+        <div class="btn-group">
+          ${this.btnUpload()}
+        </div>
       </div>
     `;
   };
 
   connected() {
-    this.btnGroup();
+    this.btnUploadAction();
   };
 };
 

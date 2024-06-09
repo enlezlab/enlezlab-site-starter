@@ -27,7 +27,7 @@ class ComponentControl extends piq {
         font-size: 16px;
       }
 
-      .component-control label {
+      .component-control__label {
         background: #222;
         color: #999;
         padding: calc(var(--space-s) / 2) var(--space-s);
@@ -154,7 +154,7 @@ class ComponentControl extends piq {
 
   componentSelect() {
     return html`
-      <label>Component</label>
+      <label class="component-control__label">Component</label>
       <select data-node="component">
         <option name="media-object" value="media-object">media-object</option>
         <option name="media-object-reverse" value="media-object-reverse">media-object-reverse</option>
@@ -165,27 +165,28 @@ class ComponentControl extends piq {
 
   titleInput() {
     return html`
-      <label>Title</label>
+      <label class="component-control__label">Title</label>
       <input data-node="title" type="text" value="${this.data().title}" />
     `;
   };
 
   ctaTextInput() {
     return html`
-      <label>Button Text</label>
+      <label class="component-control__label">Button Text</label>
       <input data-node="cta-text" type="text" value="${this.data().ctaText}" />
     `;
   };
 
   ctaLinkInput() {
     return html`
-      <label>Button Link</label>
+      <label class="component-control__label">Button Link</label>
       <input data-node="cta-link" type="text" value="${this.data().ctaLink}" />
     `;
   };
 
   imageInput() {
     return html`
+      <label class="component-control__label">Image</label>
       <image-input
         data-node="image"
       >
@@ -195,7 +196,7 @@ class ComponentControl extends piq {
 
   bodyInput() {
     return html`
-      <label>Body</label>
+      <label class="component-control__label">Body</label>
       <textarea data-node="body" id="" name="" rows="5">${this.data().body}</textarea>
     `;
   };
