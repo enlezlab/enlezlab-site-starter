@@ -25,6 +25,44 @@ class ComponentControl extends piq {
         background: #333;
         padding: calc(var(--space-s) / 2) var(--space-s);
         font-size: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .component-control__toggle {
+        border-radius: 5px;
+        background: #111;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .component-control__btn-close {
+        display: none;
+      }
+
+      .component-control__toggle--opened .component-control__btn-close {
+        display: block;
+      }
+
+      .component-control__toggle--opened .component-control__btn-open {
+        display: none;
+      }
+
+      .component-control__input-group {
+        display: grid;
+        grid-template-columns: 1fr;
+        border: 1px solid #333;
+        overflow: hidden;
+        height: 0px;
+      }
+
+      .component-control__input-group--opened {
+        height: 100%;
       }
 
       .component-control__label {
@@ -201,21 +239,41 @@ class ComponentControl extends piq {
     `;
   };
 
+  controlToggle() {
+    const header = this.querySelectorAll('.component-control__toggle')[0];
+    const inputs = this.querySelectorAll('.component-control__input-group')[0];
+
+    header.addEventListener('click', function() {
+      this.classList.toggle('component-control__toggle--opened');
+      inputs.classList.toggle('component-control__input-group--opened');
+    }, false);
+  };
+
   template() {
     return html`
         <section class="component-control">
-          <header data-node="section">${this.data().sectionName}</header>
+          <header data-node="section">
+            <span>
+              ${this.data().sectionName}
+            </span>
+            <span class="component-control__toggle">
+              <span class="component-control__btn-open">+</span>
+              <span class="component-control__btn-close">-</span>
+            </span>
+          </header>
 
-          ${this.componentSelect()}
-          ${this.titleInput()}
-          ${this.ctaTextInput()}
-          ${this.ctaLinkInput()}
-          ${this.imageInput()}
-          ${this.bodyInput()}
-
-          <div class="component-control__btn-group">
-            <button class="component-control__btn-save">Save</button>
+          <div class="component-control__input-group">
+            ${this.componentSelect()}
+            ${this.titleInput()}
+            ${this.ctaTextInput()}
+            ${this.ctaLinkInput()}
+            ${this.imageInput()}
+            ${this.bodyInput()}
+            <div class="component-control__btn-group">
+              <button class="component-control__btn-save">Save</button>
+            </div>
           </div>
+
         </section>
     `;
   };
@@ -224,6 +282,7 @@ class ComponentControl extends piq {
     this.setDefaultComponent();
     this.output();
     this.controlListener();
+    this.controlToggle();
   };
 };
 

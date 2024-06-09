@@ -13,6 +13,19 @@ class PageInteract extends piq {
         --color-fg: #fff;
       }
 
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #c9b492;
+        border-radius: 6px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background-color: #e4e4e4;
+      }
+
       .page-interact {
         box-sizing: border-box;
         background: var(--color-bg);
@@ -24,7 +37,7 @@ class PageInteract extends piq {
         width: 600px;
         height: 100%;
         transition: .3s ease;
-        overflow-y: scroll;
+        overflow-y: auto;
       }
 
       .page-interact--opened {
@@ -51,7 +64,7 @@ class PageInteract extends piq {
       .page-interact__controls {
         display: grid;
         grid-template-columns: 1fr;
-        grid-gap: var(--space-m);
+        grid-gap: var(--space-s);
       }
 
       .page-interact__control-item {
