@@ -237,9 +237,7 @@ class PageInteract extends piq {
 
     dataNode.forEach((i) => {
       i.addEventListener('click', function() {
-        console.log(i.dataset.controlName);
         const controlNode = document.querySelectorAll(`component-control[data-uid="${i.dataset.controlName}"] .component-control__toggle`)[0];
-        console.log(controlNode);
         controlNode.click();
         _this.output();
         _this.pageUpdate();
@@ -254,38 +252,38 @@ class PageInteract extends piq {
         section: "hero",
         component: "hero-main",
         type: "hero-main",
-        title: "this is title",
-        body: "this is body",
+        title: "Lead Gen Made Easy",
+        body: "Assemble high converting lead gen pages with battle tested components",
       },
       {
         section: "summary",
         component: "media-object",
         type: "media-object",
-        title: "Sed ut perspiciatis unde omnis",
+        title: "Effortless Lead Gen",
         image: "/home/value-prop-01/main.jpg",
         cta_text: "learn more",
         cta_link: "/service",
-        body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco ",
+        body: " Stop wasting time building from scratch. Our library of pre-built, high-performing components lets you assemble stunning lead gen pages in minutes. Simply choose the elements you need, customize the content, and hit publish. Focus on crafting your message, we will handle the design legwork ",
       },
       {
         section: "value prop",
         component: "media-object-reverse",
         type: "media-object",
-        title: "Sed ut perspiciatis unde omnis",
+        title: "Conversion Confidence",
         image: "/home/value-prop-02/main.jpg",
         cta_text: "learn more",
         cta_link: "/service",
-        body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco ",
+        body: "Built with a proven design system, our pre-built components are optimized for maximum conversions. Each element is strategically placed to capture leads and guide visitors towards your desired action. Don't gamble with your lead flow, leverage the power of pre-tested design components.",
       },
       {
         section: "value prop",
         component: "media-object",
         type: "media-object",
-        title: "Sed ut perspiciatis unde omnis",
+        title: "Scalable Growth",
         image: "/home/value-prop-02/main.jpg",
         cta_text: "learn more",
         cta_link: "/service",
-        body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco ",
+        body: "Your lead gen needs evolve, and so should your pages. Our modular system allows you to easily adapt and expand your landing pages as your campaigns grow. Simply add new components or adjust existing ones to fit your evolving marketing strategy. Build a foundation for long-term lead generation success.",
       },
     ]
   };
@@ -350,9 +348,6 @@ class PageInteract extends piq {
       const prefix = idx.toString();
       const section = (i.section).replace(' ', '_');
       const uid = `${prefix}_${section}`;
-      console.log(prefix);
-      console.log(i);
-      console.log(uid);
       const component = html`
         <${i.component}
           data-uid="${uid}"
@@ -365,8 +360,6 @@ class PageInteract extends piq {
         >
         </${i.component}>
       `;
-
-      console.log(component);
 
       pageNodeContent += component;
     });

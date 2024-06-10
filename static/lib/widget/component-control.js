@@ -272,7 +272,6 @@ class ComponentControl extends piq {
 
   focus() {
     const uid = this.props('data-uid').replace(' ', '_');
-    console.log(uid);
     const targetNode = document.querySelectorAll(`.mock-page [data-uid="${uid}"] > *`)[0];
     targetNode.setAttribute('data-name', uid);
     targetNode.classList.add('component-focus');
