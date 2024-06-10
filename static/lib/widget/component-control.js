@@ -8,6 +8,7 @@ class ComponentControl extends piq {
 
   style() {
     return css`
+
       .component-control {
         display: grid;
         grid-template-columns: 1fr;
@@ -185,7 +186,7 @@ class ComponentControl extends piq {
     const resObj = {};
     dataNode.forEach((i) => {
       if (i.dataset.node === 'section') {
-        resObj[i.dataset.node] = i.innerText;
+        resObj[i.dataset.node] = i.dataset.name;
       } else if (i.dataset.node === 'image') {
         resObj[i.dataset.node] = i.dataset.output;
       } else {
@@ -249,17 +250,47 @@ class ComponentControl extends piq {
   controlToggle() {
     const header = this.querySelectorAll('.component-control__toggle')[0];
     const inputs = this.querySelectorAll('.component-control__input-group')[0];
+    const _this = this;
+
+    let focusState = false;
 
     header.addEventListener('click', function() {
       this.classList.toggle('component-control__toggle--opened');
       inputs.classList.toggle('component-control__input-group--opened');
+
+      if (focusState === false) {
+        _this.focus();
+        focusState = true;
+      } else {
+        _this.unFocus();
+        focusState = false;
+      }
+
     }, false);
+  };
+
+
+  focus() {
+    const uid = this.props('data-uid').replace(' ', '_');
+    console.log(uid);
+    const targetNode = document.querySelectorAll(`.mock-page [data-uid="${uid}"] > *`)[0];
+    targetNode.setAttribute('data-name', uid);
+    targetNode.classList.add('component-focus');
+    targetNode.scrollIntoView({
+      behavior: "smooth"
+    });
+  };
+
+  unFocus() {
+    const uid = this.props('data-uid').replace(' ', '_');
+    const targetNode = document.querySelectorAll(`.mock-page [data-uid="${uid}"] > *`)[0];
+    targetNode.classList.remove('component-focus');
   };
 
   template() {
     return html`
         <section class="component-control">
-          <header data-node="section">
+          <header data-node="section" data-name="${this.data().sectionName}">
             <span>
               ${this.data().sectionName}
             </span>
@@ -277,7 +308,7 @@ class ComponentControl extends piq {
             ${this.imageInput()}
             ${this.bodyInput()}
             <div class="component-control__btn-group">
-              <button class="component-control__btn-save">Save</button>
+              <button data-control-name="${this.props('data-uid')}" class="component-control__btn-save">Save</button>
             </div>
           </div>
 

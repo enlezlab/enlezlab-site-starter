@@ -170,3 +170,22 @@ p:empty {
 
 
 
+/* temp */
+.component-focus {
+  border: 1px solid orange;
+  position: relative;
+  scroll-margin-top: 35px;
+}
+
+.component-focus::before {
+  content: attr(data-name);
+  position: absolute;
+  background: orange;
+  border: 1px solid orange;
+  top: -29px;
+  left: -1px;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}

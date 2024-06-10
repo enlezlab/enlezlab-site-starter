@@ -237,6 +237,10 @@ class PageInteract extends piq {
 
     dataNode.forEach((i) => {
       i.addEventListener('click', function() {
+        console.log(i.dataset.controlName);
+        const controlNode = document.querySelectorAll(`component-control[data-uid="${i.dataset.controlName}"] .component-control__toggle`)[0];
+        console.log(controlNode);
+        controlNode.click();
         _this.output();
         _this.pageUpdate();
       }, false);
@@ -264,8 +268,18 @@ class PageInteract extends piq {
         body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco ",
       },
       {
-        section: "value-prop",
+        section: "value prop",
         component: "media-object-reverse",
+        type: "media-object",
+        title: "Sed ut perspiciatis unde omnis",
+        image: "/home/value-prop-02/main.jpg",
+        cta_text: "learn more",
+        cta_link: "/service",
+        body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco ",
+      },
+      {
+        section: "value prop",
+        component: "media-object",
         type: "media-object",
         title: "Sed ut perspiciatis unde omnis",
         image: "/home/value-prop-02/main.jpg",
@@ -281,9 +295,10 @@ class PageInteract extends piq {
     const data = this.mockData();
     data.forEach((i, idx) => {
       const prefix = idx.toString();
+      const section = (i.section).replace(' ', '_');
       const item = html`
         <component-control
-          data-uid="${prefix}_${i.section}"
+          data-uid="${prefix}_${section}"
           data-section-name="${i.section}"
           data-component="${i.component}"
           data-title="${i.title}"
@@ -304,9 +319,12 @@ class PageInteract extends piq {
     const pageNode = document.querySelectorAll('.mock-page')[0];
     let pageNodeContent = '';
     const data = this.mockData();
-    data.forEach((i) => {
+    data.forEach((i, idx) => {
+      const section = (i.section).replace(' ', '_');
+      const uid = `${idx.toString()}_${section}`;
       const component = html`
         <${i.component}
+          data-uid="${uid}"
           data-title="${i.title}"
           data-title-level="${i.level}"
           data-body="${i.body}"
@@ -328,9 +346,16 @@ class PageInteract extends piq {
     let pageNodeContent = '';
     const output = this.dataset.output;
     const data = JSON.parse(output);
-    data.forEach((i) => {
+    data.forEach((i, idx) => {
+      const prefix = idx.toString();
+      const section = (i.section).replace(' ', '_');
+      const uid = `${prefix}_${section}`;
+      console.log(prefix);
+      console.log(i);
+      console.log(uid);
       const component = html`
         <${i.component}
+          data-uid="${uid}"
           data-title="${i['title']}"
           data-title-level="${i['level']}"
           data-body="${i['body']}"
@@ -340,6 +365,8 @@ class PageInteract extends piq {
         >
         </${i.component}>
       `;
+
+      console.log(component);
 
       pageNodeContent += component;
     });

@@ -8,6 +8,10 @@ class HeroMain extends piq {
 
   style() {
     return css`
+      hero-main {
+        display: block;
+      }
+
       .hero {
         text-align: center;
         padding: 0 var(--space-l);

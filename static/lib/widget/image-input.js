@@ -103,40 +103,16 @@ class ImageInput extends piq {
       return;
     }
 
-    const _this = this;
-    const preview = _this.querySelectorAll('.image-input__preview')[0];
-    const img = new Image();
+    const preview = this.querySelectorAll('.image-input__preview')[0];
 
-    // For handling CORS issues
-    img.crossOrigin = "anonymous";
+    const img = html`
+      <figure>
+        <img src="${this.props('data-image-url')}" alt="" />
+      </figure>
+    `;
 
-    img.onerror = function() {
-      console.error("Error loading image:", imageUrl);
-    };
-
-    img.onload = function() {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      canvas.width = this.width;
-      canvas.height = this.height;
-      ctx.drawImage(this, 0, 0);
-
-      // Change format if needed
-      const dataURL = canvas.toDataURL("image/png");
-
-      // Handle the converted base64 data here (e.g., display in console, send to server)
-      const img = html`
-        <figure>
-          <img src="${dataURL}" alt="" />
-        </figure>
-      `;
-
-      preview.innerHTML = img;
-      _this.setAttribute('data-output', dataURL);
-    };
-
-
-    img.src = imageUrl;
+    preview.innerHTML = img;
+    this.setAttribute('data-output', this.props('data-image-url'));
   }
 
   template() {
