@@ -8,6 +8,11 @@ class MediaObjectReverse extends piq {
 
   style() {
     return css`
+        media-object-reverse {
+          container-type: inline-size;
+          display: block;
+        }
+
         .media-object {
           display: grid;
           grid-template-columns: 1fr 1.2fr;
@@ -59,11 +64,12 @@ class MediaObjectReverse extends piq {
             grid-row: 1 / 2;
           }
 
-        @media (max-width: 768px) {
-          .media-object {
-            grid-template-columns: 1fr;
-            margin-bottom: calc(var(--space-l) * 1);
-          }
+          @container (max-width: 768px) {
+
+            .media-object {
+              grid-template-columns: 1fr;
+              margin-bottom: calc(var(--space-l) * 1);
+            }
 
             .media-object--reverse .media-object__img {
               grid-column: 1 / 2;
@@ -79,7 +85,29 @@ class MediaObjectReverse extends piq {
               margin-bottom: var(--space-m);
               font-size: 1.5rem;
             }
-        }
+          }
+
+          @media (max-width: 768px) {
+            .media-object {
+              grid-template-columns: 1fr;
+              margin-bottom: calc(var(--space-l) * 1);
+            }
+
+            .media-object--reverse .media-object__img {
+              grid-column: 1 / 2;
+              grid-row: 1 / 2;
+            }
+
+            .media-object--reverse .media-object__text {
+              grid-column: 1 / 2;
+              grid-row: 2 / 3;
+            }
+
+            .media-object__text h2 {
+              margin-bottom: var(--space-m);
+              font-size: 1.5rem;
+            }
+          }
     `;
   };
 
